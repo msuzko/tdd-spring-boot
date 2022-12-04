@@ -1,0 +1,18 @@
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:maindb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;
+    driverClassName: org.h2.Driver
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/master-changelog.xml
+  cache:
+    type: caffeine
+    caffeine:
+      # период обновления кэша
+      spec: expireAfterWrite=1h, recordStats
+      # список доступных кэшей
+    cacheNames: [ cars ]
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
